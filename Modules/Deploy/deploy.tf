@@ -10,7 +10,7 @@ resource "null_resource" "cluster" {
         provisioner "remote-exec" {
 		
         inline = [
-		"sudo apt-get install default-jdk -y"
+		"sudo apt-get install default-jdk -y",
 		"sudo git clone https://github.com/callicoder/spring-boot-file-upload-download-rest-api-example.git",
 		"sudo cd spring-boot-file-upload-download-rest-api-example",
 		"sudo mvn spring-boot:run"
