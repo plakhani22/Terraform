@@ -35,7 +35,7 @@ resource "aws_instance" "app-instance1" {
 }
 
 output "private_ip"{
-	value = "${aws_instance.app-instance1.private_ip}"
+	value = "${aws_instance.app-instance1.*.private_ip}"
 }
 
 variable "instance_name" {}
