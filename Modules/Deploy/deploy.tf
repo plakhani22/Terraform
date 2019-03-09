@@ -11,7 +11,7 @@ resource "null_resource" "cluster" {
 		
         inline = [
 		"sudo apt-get install default-jdk -y",
-		"sudo git clone git@github.com:plakhani22/Project.git",
+		"sudo git clone git@github.com:plakhani22/Project.git -y",
 		"sudo mvn spring-boot:run"
                 ]
         }
