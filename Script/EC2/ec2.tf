@@ -1,5 +1,5 @@
 module "ec2"{
-        source                                          = "../modules/"
+        source                                          = "../../modules/EC2/"
 
         instance_name                           = "Service1"
 
@@ -13,4 +13,9 @@ module "ec2"{
         tags = {
                 Service = "trail"
         }
+}
+
+
+output "private_ip"{
+        value = "${module.ec2.private_ip}"
 }

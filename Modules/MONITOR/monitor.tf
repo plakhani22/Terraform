@@ -1,47 +1,8 @@
-provider "aws" {
-region     = "us-east-2"
-}
-
-
-
-data "aws_ami" "ubuntu" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-owners = ["099720109477"] # Canonical
-}
-
-
-resource "aws_instance" "app-instance1" {
-        count                  = "${length(var.subnets)}"
-        ami                    = "${data.aws_ami.ubuntu.id}"
-        instance_type          = "${var.app_instance_type}"
-        vpc_security_group_ids = "${var.security_group_ids}"
-        subnet_id              = "${element(var.subnets, count.index)}"
-        tags                   = "${merge(var.tags,
-                                                                map("NAME",var.instance_name),
-                                                                map("Name",var.instance_name))}"
-        key_name               = "${var.key_name}"
-        associate_public_ip_address = true
-
-}
-
-
-
-
 resource "null_resource" "cluster" {
         count                   = "${length(var.subnets)}"
 
         connection {
-                host                    = "${element(aws_instance.app-instance1.*.private_ip,count.index)}"
+                host                    = "${element(var.ip,count.index)}"
                 user                    = "ubuntu"
                 private_key             = "${file("/home/ubuntu/Project/keys/${var.key_name}.pem")}"
         }
@@ -70,10 +31,12 @@ resource "null_resource" "cluster" {
                         "sudo mkdir consul-test",
                         "sudo mkdir consul-test/config",
                         "sudo mkdir consul-test/consul.d",
+                        "sudo useradd -rs /bin/false node_exporter",
                         "sudo curl -LO https://github.com/prometheus/node_exporter/releases/download/v0.16.0/node_exporter-0.16.0.linux-amd64.tar.gz",
                         "sudo tar -xvf node_exporter-0.16.0.linux-amd64.tar.gz",
                         "sudo mv node_exporter-0.16.0.linux-amd64/node_exporter /usr/local/bin/",
-                        "sudo useradd -rs /bin/false node_exporter",
+                        "sudo sed -i 's/Client/Client${count.index}/g' /home/ubuntu/config.json",
+                        "sudo cat /home/ubuntu/config.json",
                         "sudo mv /home/ubuntu/config.json /home/ubuntu/consul-test/config",
                         "sudo mv /home/ubuntu/node_exporter.service /etc/systemd/system/node_exporter.service",
                         "sudo nohup consul agent --config-dir /home/ubuntu/consul-test/config &",
@@ -90,10 +53,6 @@ resource "null_resource" "cluster" {
 
 }
 
-variable "instance_name" {}
-variable "latest_ami" {}
-variable "app_instance_type" {}
 variable "key_name" {}
 variable "subnets" {type="list"}
-variable "security_group_ids" {type="list"}
-variable "tags" {type="map"}
+variable "ip" {type="list"}
