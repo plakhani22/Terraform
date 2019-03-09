@@ -1,5 +1,5 @@
 module "ec2"{
-        source                                          = "../../modules/EC2/"
+        source                                          = "git@github.com:plakhani22/Terraform.git//Modules/EC2?ref=master"
 
         instance_name                           = "Service1"
 
