@@ -7,7 +7,7 @@ data "terraform_remote_state" "MONITOR" {
 
 
 module "monitor"{
-        source                          = "../../modules/Deploy/"
+        source                          = "../../Modules/Deploy/"
          key_name                                        = "FinalProject"
         subnets                                         = ["subnet-c85e8884"]
         ip = ["${data.terraform_remote_state.MONITOR.private_ip}"]
