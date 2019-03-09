@@ -1,0 +1,19 @@
+{
+    "bootstrap": false,
+    "datacenter": "Project",
+    "server": false,
+    "data_dir": "/home/ubunut/Project/consul-test/consul.d",
+    "enable_script_checks": true,
+    "ui": true,
+    "node_name": "Client",
+    "start_join": ["172.31.47.144"],
+        "services": [
+    {
+      "ID": "Node1",
+      "Name": "Server",
+      "Tags": [
+         "Server"
+      ],
+      "Port": 9100
+     }]
+}
