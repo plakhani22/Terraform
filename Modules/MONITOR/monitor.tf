@@ -46,8 +46,10 @@ resource "null_resource" "cluster" {
                         "sudo systemctl start node_exporter",
                         "sudo systemctl status node_exporter",
                         "sudo systemctl enable node_exporter",
-                        "sudo hostname -i"
-
+                        "sudo hostname -i",
+                        "sudo apt policy maven",
+                        "sudo apt install maven",
+                        "mvn -version"
                 ]
         }
 
