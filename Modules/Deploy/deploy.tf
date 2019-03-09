@@ -11,9 +11,7 @@ resource "null_resource" "cluster" {
 		
         inline = [
 		"sudo apt-get install default-jdk -y",
-		"sudo git clone https://github.com/callicoder/spring-boot-file-upload-download-rest-api-example.git",
-		"sudo ll -l",
-		"sudo cd spring-boot-file-upload-download-rest-api-example",
+		"sudo git clone git@github.com:plakhani22/Project.git",
 		"sudo mvn spring-boot:run"
                 ]
         }
