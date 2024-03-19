@@ -13,6 +13,7 @@ image:
 
 job:
   enabled: true
+  rand: asdas
 
 
 imagePullSecrets: []
