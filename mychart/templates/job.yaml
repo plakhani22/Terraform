@@ -7,9 +7,6 @@ metadata:
     rand: {{ .Values.job.rand }}
 spec:
   template:
-    metadata:
-      labels: 
-        rand: {{ .Values.job.rand }}
     spec:
       containers:
       - name: test-job
