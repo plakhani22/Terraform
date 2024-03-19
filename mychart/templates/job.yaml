@@ -2,15 +2,13 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: test-job-{{randAlphaNum 7 | lower}}
+  name: post-deploy-{{randAlphaNum 7 | lower}}
   labels: 
     rand: {{ .Values.job.rand }}
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   template:
-    metadata:
-      name: "test-job"
     spec:
       containers:
       - name: test-job
