@@ -7,9 +7,12 @@ metadata:
     rand: {{ .Values.job.rand }}
 spec:
   template:
+    metadata:
+      labels: 
+        rand: {{ .Values.job.rand }}
     spec:
       containers:
-      - name: test-job-{{ .Values.job.rand }}
+      - name: test-job
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         command: [ "/bin/bash", "-c", "--" ]
         args: [ "sleep 30" ]
