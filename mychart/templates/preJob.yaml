@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: post-deploy-{{ .Values.job.preRand }}
+  name: pre-deploy-{{ .Values.job.preRand }}
   labels: 
     rand: {{ .Values.job.preRand }}
   annotations:
