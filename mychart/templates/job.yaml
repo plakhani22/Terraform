@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: test-job-{{ .Values.job.rand }}
+  name: test-job-{{randAlphaNum 7 | lower}}
   labels: 
     rand: {{ .Values.job.rand }}
   annotations:
