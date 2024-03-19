@@ -6,7 +6,7 @@ metadata:
   labels: 
     rand: {{ .Values.job.rand }}
   annotations:
-    "helm.sh/hook": post-install
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   template:
     spec:
