@@ -2,9 +2,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: post-deploy-{{randAlphaNum 7 | lower}}
+  name: post-deploy-{{ .Values.job.postRand }}
   labels: 
-    rand: {{ .Values.job.rand }}
+    rand: {{ .Values.job.postRand }}
   annotations:
     argocd.argoproj.io/sync-wave: "5"
 spec:
