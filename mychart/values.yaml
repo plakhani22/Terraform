@@ -12,7 +12,7 @@ image:
 
 
 job:
-  enabled: false
+  enabled: true
 
 
 imagePullSecrets: []
