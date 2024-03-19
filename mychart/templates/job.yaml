@@ -2,9 +2,11 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: test-job-{{ .Values.job.rand }}
+  name: test-job
   labels: 
     rand: {{ .Values.job.rand }}
+  annotations:
+    "helm.sh/hook": post-install
 spec:
   template:
     spec:
