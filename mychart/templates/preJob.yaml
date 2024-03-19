@@ -1,0 +1,20 @@
+{{- if .Values.job.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: post-deploy-{{ .Values.job.preRand }}
+  labels: 
+    rand: {{ .Values.job.preRand }}
+  annotations:
+    argocd.argoproj.io/sync-wave: "-5"
+spec:
+  template:
+    spec:
+      containers:
+      - name: test-job
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "sleep 30" ]
+      restartPolicy: Never
+  backoffLimit: 4
+{{- end }}
