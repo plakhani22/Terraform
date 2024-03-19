@@ -9,6 +9,8 @@ metadata:
     argocd.argoproj.io/sync-wave: "5"
 spec:
   template:
+    metadata:
+      name: "test-job"
     spec:
       containers:
       - name: test-job
