@@ -1,0 +1,18 @@
+{{- if not .Values.job.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: test-job-{{randAlphaNum 7 | lower}}
+  annotations:
+    "helm.sh/hook": post-upgrade
+spec:
+  template:
+    spec:
+      containers:
+      - name: test-job
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        command: [ "/bin/bash", "-c", "--" ]
+        args: [ "sleep 30" ]
+      restartPolicy: Never
+  backoffLimit: 4
+{{- end }}
