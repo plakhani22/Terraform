@@ -3,10 +3,11 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: test-job
-  labels: 
-    rand: {{ .Values.job.rand }}
 spec:
   template:
+    metadata:
+      labels: 
+        rand: {{ .Values.job.rand }}
     spec:
       containers:
       - name: test-job
