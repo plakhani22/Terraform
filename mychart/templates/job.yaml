@@ -3,8 +3,6 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: test-job
-  annotations:
-    "helm.sh/hook": post-upgrade
 spec:
   template:
     spec:
