@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pre-deploy-{{ .Values.job.preRand }}
+  name: pre-deploy-{{ .Values.job.preRand }}-{{ .Values.image.tag | sha256sum | trunc 10 }}
   labels: 
     rand: {{ .Values.job.preRand }}
   annotations:
