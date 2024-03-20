@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: post-deploy-{{ .Values.job.postRand }}
+  name: post-deploy-{{ .Values.job.postRand }}-{{ .Values.image.tag | sha256sum | trunc 10 }}
   labels: 
     rand: {{ .Values.job.postRand }}
   annotations:
